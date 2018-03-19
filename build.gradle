@@ -1,0 +1,20 @@
+allprojects {
+    ext {
+        springBootVersion = '2.0.0.RELEASE'
+    }
+
+    group 'com.myth'
+    version '1.0.0'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+subprojects {
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+    repositories {
+        mavenCentral()
+    }
+}
+

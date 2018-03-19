@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎登录</title>
+    <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container"
+     style="margin-top: 10%; background-image: img/back.jpg">
+    <div class="jumbotron">
+        <h1>Welcome Back!</h1>
+        <fieldset style="">
+            <legend>check</legend>
+            <form method="post" class="bs-example bs-example-form" action="/login"
+                  style="margin-left: 20%; width: 500px; height: 200px;">
+                <div class="input-group h60" style="">
+                    <span class="input-group-addon">@</span> <input id="username" name="username"
+                                                                    type="text" class="form-control h60"
+                                                                    placeholder="username">
+                </div>
+                <div class="input-group h60" style="margin-top: 5px;">
+                    <span class="input-group-addon">@</span> <input id="password" name="password"
+                                                                    type="password" class="form-control h60">
+                </div>
+                <div class="input-group h60" style="margin-top: 10px;">
+                    <input type="submit" value="Sign In" class="btn btn-primary"
+                           style="margin-left: 190px;"/>
+                </div>
+                <br>
+            </form>
+        </fieldset>
+    </div>
+</div>
+</body>
+</>
