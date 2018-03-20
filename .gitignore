@@ -1,0 +1,8 @@
+.gradle/
+.idea/
+core/out/
+log/out/
+mail/out/
+user/out/
+web/build/
+web/out/
