@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class AccountService implements UserDetailsService{
+public class AccountService implements UserDetailsService {
 
     @Autowired
     private AccountDao dao;
@@ -31,15 +31,14 @@ public class AccountService implements UserDetailsService{
         return account;
     }
 
-    public Account aadAccount(Account account,@Nullable User user) {
-        if (user == null){
+    public Account aadAccount(Account account, @Nullable User user) {
+        if (user == null) {
             user = new User();
             user.setNickName("myth_hai");
             user.setEmail("89938298@qq.com");
             user.setSex(true);
         }
         User save = userDao.save(user);
-        account.setUser(user);
         Account account1 = dao.save(account);
 
         return account1;
@@ -50,17 +49,18 @@ public class AccountService implements UserDetailsService{
         account.setSize(2);
         account.setPage(page);
         Sort.Direction direction = Sort.Direction.ASC.toString().equalsIgnoreCase(account.getSord()) ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Sort sort = new Sort(direction,account.getSidx());
-        PageRequest request = new PageRequest(account.getPage() - 1, account.getSize(),sort);
+        Sort sort = new Sort(direction, account.getSidx());
+        PageRequest request = new PageRequest(account.getPage() - 1, account.getSize(), sort);
         return dao.findAll(request).getContent();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account user = dao.getAccountInfo(username);
-        if (null == user){
-            throw BaseException.create(Errors.FILE_NULL,"username");
+        if (null == user) {
+            throw BaseException.create(Errors.FILE_NULL, "username");
         }
+        System.out.println("user:" + user);
         return user;
     }
 }

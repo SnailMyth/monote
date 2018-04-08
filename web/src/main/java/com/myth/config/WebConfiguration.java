@@ -33,10 +33,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 
 
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/static/");
-    }
 
     @Bean
     public MultipartConfigElement multipartConfigElement(){

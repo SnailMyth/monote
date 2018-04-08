@@ -1,8 +1,8 @@
 package com.myth.domain;
 
 import com.myth.base.BaseEntity;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -13,16 +13,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "account")
-public class Account extends BaseEntity implements Serializable, UserDetails {
+public class Account extends BaseEntity implements Serializable,UserDetails {
 
     public Account() {
 
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id", nullable = false, unique = true)
+    @GenericGenerator(name = "generator", strategy = "native")
+    @GeneratedValue(generator="generator")
+    private int id;
 
     @Column(name = "username", unique = true)
     private String username;
@@ -31,25 +32,21 @@ public class Account extends BaseEntity implements Serializable, UserDetails {
     private String password;
 
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = false;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "u_id")
-    private User user;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = {
-                    @JoinColumn(name = "ar_user_id"),
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "ar_role_id")
-            })
+    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE },mappedBy = "ownerId",fetch = FetchType.EAGER)
     private List<Roles> roles;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -72,19 +69,9 @@ public class Account extends BaseEntity implements Serializable, UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        List<GrantedAuthority> auths = new ArrayList<>();
-        List<Roles> roles = getRoles();
-        for (Roles role : roles) {
-            auths.add(new SimpleGrantedAuthority(role.getFlag()));
-        }
-        return auths;
+        return roles;
     }
 
     public String getPassword() {
@@ -111,19 +98,25 @@ public class Account extends BaseEntity implements Serializable, UserDetails {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public List<Roles> getRoles() {
+        if (roles == null){
+            roles = new ArrayList<>();
+        }
         return roles;
     }
 
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", active=" + active +
+                ", roles=" + roles +
+                '}';
     }
 }

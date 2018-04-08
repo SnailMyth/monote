@@ -1,29 +1,49 @@
 package com.myth.domain;
 
 import com.myth.base.BaseEntity;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
-public class Roles extends BaseEntity implements Serializable {
+public class Roles extends BaseEntity implements Serializable,GrantedAuthority {
     @Id
-    @Column(name = "r_id")
-    private Long id;
+    @Column(name = "id", nullable = false, unique = true)
+    @GenericGenerator(name = "generator", strategy = "native")
+    @GeneratedValue(generator="generator")
+    private int id;
     @Column(name = "r_name")
     private String name;
-    @Column(name = "r_flag")
-    private String flag;
 
-    public Long getId() {
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+    @JoinColumn(name="ownerId")
+    private Account ownerId;
+
+    public Account getAccount() {
+        return ownerId;
+    }
+
+    public void setAccount(Account account) {
+        this.ownerId = account;
+    }
+
+    public Roles() {
+    }
+
+    public Roles(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,11 +55,16 @@ public class Roles extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public String getFlag() {
-        return flag;
+    @Override
+    public String getAuthority() {
+        return name;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    @Override
+    public String toString() {
+        return "Roles{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

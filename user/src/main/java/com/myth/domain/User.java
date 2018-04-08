@@ -19,7 +19,6 @@ public class User extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-
     @Column
     private String nickName;
 
