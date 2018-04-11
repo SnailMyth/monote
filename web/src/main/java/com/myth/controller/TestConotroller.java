@@ -7,6 +7,7 @@ import com.myth.service.EmailService;
 import com.myth.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,5 +64,14 @@ public class TestConotroller {
         return  model;
     }
 
+    @RequestMapping("/websocket")
+    public String webSocket(){
+        return "webSocket";
+    }
 
+    @RequestMapping("/error/{number}")
+    public String error(@PathVariable int number){
+        System.out.println(20 / number);
+        return "test";
+    }
 }

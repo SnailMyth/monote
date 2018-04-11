@@ -18,10 +18,27 @@
 </head>
 <body>
 <div class="container">
-    this is error page!
-    <div>
-        [[${result}]]
-    </div>
+    <form enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="file-loading">
+                <input id="file" type="file" multiple class="file" data-overwrite-initial="false">
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        $("#file").fileinput({
+            theme: 'fa',
+            uploadUrl: '/test/upload',
+            allowedPreviewTypes: false,
+            maxFileSize: 1000000,
+            maxFilesNum: 10,
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+
+
+    </script>
 </div>
 </body>
 </html>
