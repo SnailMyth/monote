@@ -1,8 +1,7 @@
-package com.myth.dao;
+package com.myth.dao.user;
 
 import com.myth.base.BaseRepository;
-import com.myth.domain.Roles;
-import com.myth.domain.User;
+import com.myth.domain.user.Roles;
 import org.springframework.stereotype.Repository;
 
 @Repository

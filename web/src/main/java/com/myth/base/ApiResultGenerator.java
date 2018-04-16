@@ -4,16 +4,6 @@ package com.myth.base;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * 项目名称：credirCardApi
- * 项目版本：V1.0
- * 包名称：com.xunmei.core.api
- * 创建人：yuqy
- * 创建时间：2017/3/17 16:39
- * 修改人：yuqy
- * 修改时间：2017/3/17 16:39
- * 修改备注：
- */
 public final class ApiResultGenerator
 {
     /**

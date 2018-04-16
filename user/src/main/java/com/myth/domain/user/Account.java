@@ -1,4 +1,4 @@
-package com.myth.domain;
+package com.myth.domain.user;
 
 import com.myth.base.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;

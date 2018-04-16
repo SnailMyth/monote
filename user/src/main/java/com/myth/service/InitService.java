@@ -1,9 +1,9 @@
 package com.myth.service;
 
-import com.myth.dao.AccountDao;
-import com.myth.dao.RolesDao;
-import com.myth.domain.Account;
-import com.myth.domain.Roles;
+import com.myth.dao.user.AccountDao;
+import com.myth.dao.user.RolesDao;
+import com.myth.domain.user.Account;
+import com.myth.domain.user.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

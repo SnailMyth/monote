@@ -1,6 +1,6 @@
 package com.myth.controller;
 
-import com.myth.domain.Account;
+import com.myth.domain.user.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

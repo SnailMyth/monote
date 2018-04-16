@@ -1,4 +1,4 @@
-package com.myth.domain;
+package com.myth.domain.user;
 
 import com.myth.base.BaseEntity;
 
@@ -16,7 +16,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Id
     @Column(name = "u_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column

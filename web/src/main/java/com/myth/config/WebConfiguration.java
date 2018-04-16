@@ -10,10 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.servlet.MultipartConfigElement;
 import java.util.List;
@@ -31,8 +28,13 @@ public class WebConfiguration implements WebMvcConfigurer {
         converters.add(converter);
     }
 
-
-
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .allowedOrigins("*");
+    }
 
     @Bean
     public MultipartConfigElement multipartConfigElement(){

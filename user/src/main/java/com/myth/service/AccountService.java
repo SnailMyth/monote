@@ -2,10 +2,10 @@ package com.myth.service;
 
 import com.myth.base.BaseException;
 import com.myth.base.Errors;
-import com.myth.dao.AccountDao;
-import com.myth.dao.UserDao;
-import com.myth.domain.Account;
-import com.myth.domain.User;
+import com.myth.dao.user.AccountDao;
+import com.myth.dao.user.UserDao;
+import com.myth.domain.user.Account;
+import com.myth.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

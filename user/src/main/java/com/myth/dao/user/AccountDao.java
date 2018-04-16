@@ -1,7 +1,7 @@
-package com.myth.dao;
+package com.myth.dao.user;
 
 import com.myth.base.BaseRepository;
-import com.myth.domain.Account;
+import com.myth.domain.user.Account;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

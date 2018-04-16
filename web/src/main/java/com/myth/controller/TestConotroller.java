@@ -19,13 +19,12 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/test")
 public class TestConotroller {
 
     @Autowired
     private EmailService service;
 
-    @RequestMapping("/mail")
+    @RequestMapping("/test/mail")
     public void sendMail(HttpServletResponse response) {
         service.sendSimpleMail("myth_hai@163.com", "发给小朋友", "这是发给小朋友的发送邮件");
         System.out.println("send finish");
@@ -37,7 +36,7 @@ public class TestConotroller {
 
     }
 
-    @RequestMapping(value = {"/upload"})
+    @RequestMapping(value = {"/test/upload"})
     @ResponseBody
     public ApiModel imgupload(HttpServletRequest request, HttpServletResponse response, @RequestParam("file_data") MultipartFile file) {
         ApiModel model = new ApiModel();
@@ -64,7 +63,7 @@ public class TestConotroller {
         return  model;
     }
 
-    @RequestMapping("/websocket")
+    @RequestMapping("/test/websocket")
     public String webSocket(){
         return "webSocket";
     }
@@ -74,4 +73,11 @@ public class TestConotroller {
         System.out.println(20 / number);
         return "test";
     }
+
+    @RequestMapping("/cors")
+    @ResponseBody
+    public String corsIndex(){
+        return "this is cors info";
+    }
+
 }

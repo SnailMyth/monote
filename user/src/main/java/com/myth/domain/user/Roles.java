@@ -1,4 +1,4 @@
-package com.myth.domain;
+package com.myth.domain.user;
 
 import com.myth.base.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
@@ -6,8 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "roles")

@@ -1,7 +1,7 @@
 package com.myth.controller;
 
-import com.myth.domain.Account;
-import com.myth.domain.User;
+import com.myth.domain.user.Account;
+import com.myth.domain.user.User;
 import com.myth.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -10,11 +10,29 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all"
           rel="stylesheet" type="text/css"/>
     <link href="/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+        function corsRequest() {
+            alert("aaa");
+            $.ajax({
+                url: "http://localhost:8087/cors",
+                success: function (data) {
+                    console.log(data);
+                    $("#res").html(data);
+                }
+            });
+        }
 
+
+    </script>
 </head>
 <body>
+
 <div class="container">
     <div><span><label>[[${user}]] :Welcome to mood note blog...</label></span></div>
+    <div>
+        <button id="cors" type="button" onclick="corsRequest()">跨域请求</button>
+        <span><label id="res"></label></span>
+    </div>
 </div>
 </body>
 </html>
