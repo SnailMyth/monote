@@ -36,6 +36,6 @@ public enum DateFormat {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(DateFormat.FORMAT_ROUND_NAME.format(new Date()));
+		System.out.println(DateFormat.FORMAT_FULL_CN.format(new Date()));
 	}
 }
