@@ -8,10 +8,22 @@
     <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <script type="text/javascript">
+        function register() {
+            var  url = window.location.href;
+            var pos = url.lastIndexOf("/");
+            url = url.substring(0,pos) +"/registerView";
+            console.log(url)
+            window.location.href= url;
+        }
+
+
+    </script>
 </head>
 <body>
 <div class="container"
-     style="margin-top: 10%; background-image: img/back.jpg">
+     style="margin-top: 10%;">
     <div class="jumbotron">
         <h1>Welcome Back!</h1>
         <fieldset style="">
@@ -30,6 +42,8 @@
                 <div class="input-group h60" style="margin-top: 10px;">
                     <input type="submit" value="Sign In" class="btn btn-primary"
                            style="margin-left: 190px;"/>
+                    <input type="button" value="Sign up" class="btn btn-primary" onclick="register()"
+                           style="margin-left: 20px;"/>
                 </div>
                 <br>
             </form>

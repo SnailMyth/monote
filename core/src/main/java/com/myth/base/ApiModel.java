@@ -4,89 +4,109 @@ import com.google.common.base.Strings;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class ApiModel extends HashMap {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5215379190842912614L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5215379190842912614L;
 
-	public static final String ERROR = "error";
-	public static final String ERROR_MESSAGE = "error_message";
-	public static final String ERROR_DATA = "error_data";
-	public static final String DATA = "data";
+    public static final String ERROR = "error";
+    public static final String ERROR_MESSAGE = "error_message";
+    public static final String ERROR_DATA = "error_data";
+    public static final String DATA = "data";
+    public static final String FLAG = "flag";
 
-	public String getError() {
-		return (String) this.get(ERROR);
-	}
+    public ApiModel(){
+        this.fail();
+    }
 
-	public void setError(Errors error, Object... data) {
-		if (error != null) {
-			this.put(ERROR, error.getCode());
-			this.setErrorData(data);
-			if (data == null) {
-				data = new String[] {};
-			}
-			this.put(ERROR_DATA, data);
-			if (data.length > 0) {
-				this.put(ERROR_MESSAGE, MessageFormat.format(error.getMessage(), data));
-			} else {
-				this.put(ERROR_MESSAGE, error.getMessage());
-			}
+    public String getError() {
+        return (String) this.get(ERROR);
+    }
 
-		} else {
-			this.cleanError();
-		}
-	}
+    public void setError(Errors error, Object... data) {
+        fail();
+        if (error != null) {
+            this.put(ERROR, error.getCode());
+            this.setErrorData(data);
+            if (data == null) {
+                data = new String[]{};
+            }
+            this.put(ERROR_DATA, data);
+            if (data.length > 0) {
+                this.put(ERROR_MESSAGE, MessageFormat.format(error.getMessage(), data));
+            } else {
+                this.put(ERROR_MESSAGE, error.getMessage());
+            }
 
-	public void setError(Exception ex) {
-		if (ex != null) {
-			if (ex instanceof BaseException) {
-				BaseException e = ((BaseException) ex);
-				setErr(e.getCode(), ex.getMessage());
-				this.put(ERROR_DATA, ((BaseException) ex).getData());
-			}
+        } else {
+            this.cleanError();
+        }
+    }
 
-		} else {
-			this.cleanError();
-		}
-	}
+    public void setError(Exception ex) {
+        fail();
+        if (ex != null) {
+            if (ex instanceof BaseException) {
+                BaseException e = ((BaseException) ex);
+                setErr(e.getCode(), ex.getMessage());
+                this.put(ERROR_DATA, ((BaseException) ex).getData());
+            }
 
-	private void setErr(String code, String message) {
-		this.put(ERROR, code);
-		this.put(ERROR_MESSAGE, message);
-	}
+        } else {
+            this.cleanError();
+        }
+    }
 
-	public String getErrorMessage() {
-		return (String) this.get(ERROR_MESSAGE);
-	}
+    private void setErr(String code, String message) {
+        this.put(ERROR, code);
+        this.put(ERROR_MESSAGE, message);
+    }
 
-	public Object[] getErrorData() {
-		
-		return (Object[]) this.get(ERROR_DATA);
-	}
+    public String getErrorMessage() {
+        return (String) this.get(ERROR_MESSAGE);
+    }
 
-	public void setErrorData(Object... errorData) {
-		this.put(ERROR_DATA, errorData);
-	}
+    public Object[] getErrorData() {
 
-	public void cleanError() {
-		this.remove(ERROR);
-		this.remove(ERROR_MESSAGE);
-		this.remove(ERROR_DATA);
-	}
+        return (Object[]) this.get(ERROR_DATA);
+    }
 
-	public boolean isSuccess() {
-		return Strings.isNullOrEmpty(this.getError());
-	}
+    public void setErrorData(Object... errorData) {
+        this.put(ERROR_DATA, errorData);
+    }
 
-	public void setData(Object value) {
-		this.put(DATA, value);
-	}
+    public void cleanError() {
+        fail();
+        this.remove(ERROR);
+        this.remove(ERROR_MESSAGE);
+        this.remove(ERROR_DATA);
+    }
 
-	public Object getData() {
-		return this.get(DATA);
-	}
+
+    public void success() {
+        this.put(FLAG, true);
+    }
+
+    public void fail() {
+        this.put(FLAG, false);
+    }
+
+    public boolean isSuccess() {
+        return Strings.isNullOrEmpty(this.getError());
+    }
+
+    public void setData(Object value) {
+        success();
+        this.put(DATA, value);
+    }
+
+    public Object getData() {
+        return this.get(DATA);
+    }
+
 }

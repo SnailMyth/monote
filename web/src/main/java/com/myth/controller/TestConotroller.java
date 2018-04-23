@@ -3,7 +3,8 @@ package com.myth.controller;
 import com.myth.base.ApiModel;
 import com.myth.base.BaseException;
 import com.myth.base.Errors;
-import com.myth.service.EmailService;
+import com.myth.domain.user.Account;
+import com.myth.service.AccountService;
 import com.myth.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,20 +22,21 @@ import java.io.IOException;
 @Controller
 public class TestConotroller {
 
+
     @Autowired
-    private EmailService service;
+    private AccountService accountService;
 
-    @RequestMapping("/test/mail")
-    public void sendMail(HttpServletResponse response) {
-        service.sendSimpleMail("myth_hai@163.com", "发给小朋友", "这是发给小朋友的发送邮件");
-        System.out.println("send finish");
-        try {
-            response.sendRedirect("/account/index");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    @RequestMapping("/test/mail")
+//    public void sendMail(HttpServletResponse response) {
+//        service.sendSimpleMail("myth_hai@163.com", "发给小朋友", "这是发给小朋友的发送邮件");
+//        System.out.println("send finish");
+//        try {
+//            response.sendRedirect("/account/index");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     @RequestMapping(value = {"/test/upload"})
     @ResponseBody
@@ -74,10 +76,10 @@ public class TestConotroller {
         return "test";
     }
 
-    @RequestMapping("/cors")
+    @RequestMapping("/test/user")
     @ResponseBody
-    public String corsIndex(){
-        return "this is cors info";
+    public Account getInfo(String name){
+        Account info = accountService.getInfo(name);
+        return  info;
     }
-
 }

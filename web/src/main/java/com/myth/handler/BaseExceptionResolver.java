@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class BaseExceptionResolver extends AbstractHandlerExceptionResolver {
-	
+
 
 	@Override
 	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler,

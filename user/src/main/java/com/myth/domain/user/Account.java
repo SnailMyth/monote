@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "account")
-public class Account extends BaseEntity implements Serializable,UserDetails {
+public class      Account extends BaseEntity implements Serializable,UserDetails {
 
     public Account() {
 
@@ -103,6 +103,10 @@ public class Account extends BaseEntity implements Serializable,UserDetails {
             roles = new ArrayList<>();
         }
         return roles;
+    }
+
+    public void actvice(){
+        this.active = true;
     }
 
     public void setRoles(List<Roles> roles) {

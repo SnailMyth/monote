@@ -33,7 +33,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compileOnly('org.projectlombok:lombok')
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
     compile project(":user")
-    compile project(":mail")
     compile project(":core")
 }

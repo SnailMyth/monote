@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Motion Note</title>
@@ -12,27 +13,48 @@
     <link href="/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function corsRequest() {
-            alert("aaa");
+            console.log("ajax request");
             $.ajax({
-                url: "http://localhost:8087/cors",
+                url: "http://localhost:8087/user/list",
                 success: function (data) {
                     console.log(data);
-                    $("#res").html(data);
+                    $("#res").html(data.toString());
                 }
             });
         }
-
-
+        
+        function deleteUser() {
+            var name = $("#name").val();
+            var url = "http://localhost:8087/user/delete/" + name;
+            $.ajax({
+                url:url,
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }
     </script>
 </head>
 <body>
 
 <div class="container">
-    <div><span><label>[[${user}]] :Welcome to mood note blog...</label></span></div>
+    <div><span><label>[[${user.username}]] :Welcome to mood note blog...</label></span></div>
     <div>
         <button id="cors" type="button" onclick="corsRequest()">跨域请求</button>
         <span><label id="res"></label></span>
     </div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <table>
+        <tr>
+            <td><input type="text" id="name" name="name"/></td>
+            <td>
+                <button type="button" class="btn" id="delete" onclick="deleteUser()">删除</button>
+            </td>
+        </tr>
+
+    </table>
 </div>
 </body>
 </html>
