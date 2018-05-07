@@ -33,6 +33,43 @@
                 }
             });
         }
+        
+        function testStudent() {
+            var sname = $("#sname").val();
+            var tname = $("#tname").val();
+            var age = $("#age").val();
+            var url = "http://localhost:8087/user/info";
+            $.ajax({
+                url:url,
+                data:{
+                    "teacher.name":sname,
+                    "student.name":tname,
+                    "student.age":age
+                },
+                success: function (data) {
+                    console.log(data);
+                    alert(data);
+                }
+            });
+        }
+        
+        function testUser() {
+            var name = $("#u_user").val();
+            var age = $("#u_age").val();
+            var str = "{\'name\':"+name+",\'age\':"+age+"}";
+            var url = "http://localhost:8087/user/info1";
+            $.ajax({
+                url:url,
+                data:{
+                    desString:str
+                },
+                success:function (data) {
+                    alert(data);
+                    console.log(data);
+                }
+            });
+
+        }
     </script>
 </head>
 <body>
@@ -46,14 +83,34 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
     </form>
-    <table>
+    <table class="table">
         <tr>
             <td><input type="text" id="name" name="name"/></td>
             <td>
                 <button type="button" class="btn" id="delete" onclick="deleteUser()">删除</button>
             </td>
         </tr>
+    </table>
 
+    <table class="table">
+        <tr>
+            <td><input type="text" id="sname" name="name"/></td>
+            <td><input type="text" id="tname" name="name"/></td>
+            <td><input type="text" id="age" name="name"/></td>
+            <td>
+                <button type="button" class="btn" id="test" onclick="testStudent()">提交</button>
+            </td>
+        </tr>
+    </table>
+    <hr/>
+    <table class="table">
+        <tr>
+            <td><input type="text" id="u_name" name="name"/></td>
+            <td><input type="text" id="u_age" name="name"/></td>
+            <td>
+                <button type="button" class="btn" id="t_user" onclick="testUser()">提交</button>
+            </td>
+        </tr>
     </table>
 </div>
 </body>

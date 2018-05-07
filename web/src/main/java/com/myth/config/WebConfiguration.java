@@ -3,11 +3,15 @@ package com.myth.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.myth.intercepter.ContentSecurityInterceptor;
+import com.myth.resolver.ContentSecurityMethodArgumentResolver;
+import com.myth.resolver.CustomerArgumentResolver;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.servlet.MultipartConfigElement;
@@ -66,5 +70,15 @@ public class WebConfiguration implements WebMvcConfigurer {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         factory.setMaxFileSize(1024L * 1024L * 100L);
         return factory.createMultipartConfig();
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
     }
 }
